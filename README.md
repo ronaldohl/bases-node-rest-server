@@ -6,6 +6,12 @@
 
 - npm bodyParser
 
+- bcrypt
+
+- uniqueValidators
+
+- MongoDB
+
 - Organización Proyecto
 
 - variables globales
