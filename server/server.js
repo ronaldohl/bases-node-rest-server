@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const colors = require('colors');
 const bodyParser = require('body-parser');
 require('./config/config');
@@ -12,35 +13,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+app.use(require('./routes/usuario'));
+
 
 app.get('/', (req, res) => {
     res.json('Hola Mundo')
 });
 
-app.get('/usuario', (req, res) => {
-    res.json('getUsuario')
+
+
+//Conexion a db mongo
+//Nuevos argumentos que pide para quitar warnings, no están en el curso
+mongoose.connect('mongodb://localhost:27017/cafe', { useNewUrlParser: true, useUnifiedTopology: true }, (err, res) => {
+    if (err) throw err;
+    console.log("Base de datos Mongo Online".green);
 });
 
-app.post('/usuario', (req, res) => {
-    let body = req.body;
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        })
-    } else {
-        res.json({ body })
-    }
-});
 
-app.put('/usuario/:id', (req, res) => {
-    let id = req.params.id;
-    res.json({ id })
-});
 
-app.delete('/usuario', (req, res) => {
-    res.json('deleteUsuario')
-});
 
 //Iniciando el servidor
 app.listen(process.env.PORT, () => {
