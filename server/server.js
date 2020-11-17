@@ -23,8 +23,8 @@ app.get('/', (req, res) => {
 
 
 //Conexion a db mongo
-//Nuevos argumentos que pide para quitar warnings, no están en el curso
-mongoose.connect('mongodb://localhost:27017/cafe', { useNewUrlParser: true, useUnifiedTopology: true }, (err, res) => {
+//Nuevos argumentos que pide para quitar warnings, video107
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (err, res) => {
     if (err) throw err;
     console.log("Base de datos Mongo Online".green);
 });
